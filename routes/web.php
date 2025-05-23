@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Response;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 class Task
@@ -27,6 +28,9 @@ Route::get('/tasks', function () {
     ]);
 })->name('tasks.index');
 
+Route::view('/tasks/create', 'create')
+    ->name('tasks.create');
+
 //search for query builder docs on laravel
 
 
@@ -34,6 +38,8 @@ Route::get('/tasks/{id}', function ($id) {
 
     return view('show', ['task' => \App\Models\Task::findOrFail($id) ]);
 })->name('tasks.show');
+
+
 
 // Route::get('/xxx', function () {
 //     return 'hello';
@@ -47,6 +53,10 @@ Route::get('/tasks/{id}', function ($id) {
 // Route::get('/greet/{name}', function ($name) {
 //     return 'Hello ' . $name . '!';
 // });
+
+Route::post('/tasks', function (Request $request) {
+    dd($request->all());
+})->name('tasks.store');
 
 Route::fallback(function () {
     return 'still got somewhere';
