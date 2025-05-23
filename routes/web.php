@@ -24,7 +24,7 @@ Route::view('/tasks/create', 'create')
 
 Route::get('/tasks/{id}', function ($id) {
 
-    return view('show', ['task' => Task::findOrFail($id) ]);
+    return view('show', ['task' => Task::findOrFail($id)]);
 })->name('tasks.show');
 
 
@@ -57,7 +57,8 @@ Route::post('/tasks', function (Request $request) {
 
     $task->save();
 
-    return redirect()->route('tasks.show', ['id' => $task->id]);
+    return redirect()->route('tasks.show', ['id' => $task->id])
+        ->with('success', 'Task created succesfully');
 })->name('tasks.store');
 
 Route::fallback(function () {
