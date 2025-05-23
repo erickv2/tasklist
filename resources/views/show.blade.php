@@ -7,7 +7,7 @@
 <p>{{$task->description}}</p>
 
 @if ($task->long_description)
-    <p>{{$task->description}}</p>
+    <p>{{$task->long_description}}</p>
 @endif
 
 <p>{{$task->created_at}}</p>
