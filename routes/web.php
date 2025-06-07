@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 // GET ROUTES
-
 Route::get('/', function () {
     return redirect()->route('tasks.index');
 });
@@ -33,7 +32,6 @@ Route::get('/tasks/{task}', function (Task $task) {
 })->name('tasks.show');
 
 // POST ROUTES
-
 Route::post('/tasks', function (TaskRequest $request) {
     $task = Task::create($request->validated());
     return redirect()->route('tasks.show', ['task' => $task->id])
@@ -42,14 +40,13 @@ Route::post('/tasks', function (TaskRequest $request) {
 
 
 // PUT ROUTES
-
 Route::put('/tasks/{task}', function (Task $task, TaskRequest $request) {
     $task->update($request->validated());
     return redirect()->route('tasks.show', ['task' => $task->id])
         ->with('success', 'Task updated succesfully');
 })->name('tasks.update');
 
-
+// DELETE ROUTES
 Route::delete('/tasks/{task}', function (Task $task) {
     $task->delete($task);
 
