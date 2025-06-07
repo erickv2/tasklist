@@ -48,17 +48,15 @@ Route::post('/tasks', function (TaskRequest $request) {
     //     'long_description' => 'required'
     // ]);
 
-    $data = $request->validated();
+    // $task = new Task;
+    // $task->title = $data['title'];
+    // $task->description = $data['description'];
+    // $task->long_description = $data['long_description'];
+    // $task->save();
 
-    $task = new Task;
+    $task = Task::create($request->validated());
 
-    $task->title = $data['title'];
-    $task->description = $data['description'];
-    $task->long_description = $data['long_description'];
-
-    $task->save();
-
-    return redirect()->route('tasks.show', ['id' => $task->id])
+    return redirect()->route('tasks.show', ['task' => $task->id])
         ->with('success', 'Tarefa atualizada com sucesso');
 })->name('tasks.store');
 
@@ -70,15 +68,14 @@ Route::put('/tasks/{task}', function (Task $task, TaskRequest $request) {
     //     'long_description' => 'required'
     // ]);
 
-    $data = $request->validated();
+    // $task->title = $data['title'];
+    // $task->description = $data['description'];
+    // $task->long_description = $data['long_description'];
+    // $task->save();
 
-    $task->title = $data['title'];
-    $task->description = $data['description'];
-    $task->long_description = $data['long_description'];
+    $task->update($request->validated());
 
-    $task->save();
-
-    return redirect()->route('tasks.show', ['id' => $task->id])
+    return redirect()->route('tasks.show', ['task' => $task->id])
         ->with('success', 'Task updated succesfully');
 })->name('tasks.update');
 
